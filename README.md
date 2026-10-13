@@ -1,31 +1,24 @@
-# The Peaceful Birth · Doula
+# The Peaceful Birth · Doula website
 
-A static website promoting a birth & postpartum doula business, laid out like the
-[@thepeacefulbirth](https://www.instagram.com/thepeacefulbirth/) Instagram profile:
+A business website for [@thepeacefulbirth](https://www.instagram.com/thepeacefulbirth/) — doula support
+and birth classes helping couples achieve a positive birth experience. Content follows her Instagram
+posts ("Signs that tell you that you need a doula in your birth team", "Birth Support Service",
+"How to work with me", client testimonies / story time) and her earthy terracotta palette.
 
-- **Profile header** — avatar, handle, stats, bio and "Book a consult" button
-- **Story highlights** that filter posts: Birth tips, Services, Birth stories, Postpartum, Kind words
-- **Posts / Kind words / Saved** tabs
-- **3-column post grid** — designed quote/tip cards (drawn in CSS, no images needed) mixed with photo posts
-- **Post pop-up** with caption, hashtags, like/save (double-tap to like) and "Book a free consultation"
-- **Services & pricing**, an About section, FAQ, and a consultation form (due date, birth place, service) that opens the visitor's email app — no backend needed
+## Sections
 
-## Editing content
+Hero · Signs you need a doula · Services (Birth Classes, Doula Support, Consultation) ·
+How to work with me · About · Testimonials + Instagram · FAQ · Booking form · Floating WhatsApp button
 
-Everything lives in `js/content.js`:
+## Editing
 
-- `SITE` — name, handle, bio lines, email, phone, service area, stats
-- `HIGHLIGHTS` — the story-highlight categories
-- `POSTS` — grid posts. `type: "card"` posts are text graphics (`theme`: sage, clay, cream, blush, ink); `type: "photo"` posts use `image`
-- `SERVICES` — packages and prices
-- `FAQ` — question/answer pairs
+- **Contact details** — top of `js/main.js` (`CONTACT.whatsapp`, `instagram`, `email`).
+  The booking form opens WhatsApp with the visitor's details filled in.
+- **Photos** — add `images/doula.jpg` (hero, portrait ~4:5) and `images/about.jpg` (about section).
+  Until then, an illustrated placeholder is shown.
+- **Text, services, testimonials, FAQ** — edit directly in `index.html`.
 
-To use real photos from Instagram, save them to an `images/` folder and set `image: "images/your-photo.jpg"`.
+## Running / hosting
 
-## Running locally
-
-No build step. Open `index.html`, or run `python3 -m http.server 8000` in this folder.
-
-## GitHub Pages
-
-Settings → Pages → Deploy from a branch → pick this branch and `/ (root)`.
+No build step: open `index.html`, or `python3 -m http.server 8000`.
+GitHub Pages: Settings → Pages → Deploy from a branch → this branch, `/ (root)`.

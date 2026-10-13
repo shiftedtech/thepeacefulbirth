@@ -3,177 +3,294 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Peaceful Birth · Doula</title>
-  <meta name="description" content="Birth and postpartum doula support for calm, informed, supported births. Book a free consultation." />
+  <title>The Peaceful Birth · Doula Support & Birth Classes</title>
+  <meta name="description" content="Doula support and birth classes helping couples achieve a positive, peaceful birth experience." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar__inner">
-      <a href="#" class="brand" id="brand"></a>
-      <nav class="topbar__links">
-        <a href="#feed">Posts</a>
+  <!-- ========== NAV ========== -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#top" class="logo">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" class="logo__ring"/><path d="M6 28c5-6 9-6 14-2s9 4 14-2" class="logo__hill"/><path d="M8 32c5-4 9-4 12-2s8 3 12-1" class="logo__hill logo__hill--2"/><circle cx="26" cy="14" r="4" class="logo__sun"/></svg>
+        <span>The Peaceful Birth</span>
+      </a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+      <nav class="nav__links" id="nav-links">
+        <a href="#why">Why a doula</a>
         <a href="#services">Services</a>
+        <a href="#how">How it works</a>
+        <a href="#stories">Stories</a>
         <a href="#faq">FAQ</a>
-        <a href="#contact" class="btn btn--small">Free consultation</a>
+        <a href="#contact" class="btn btn--sm">Book a chat</a>
       </nav>
     </div>
   </header>
 
-  <main class="page">
-    <!-- Profile header, laid out like an Instagram profile -->
-    <section class="profile">
-      <div class="profile__avatar"><span id="avatar-initials"></span></div>
-      <div class="profile__info">
-        <div class="profile__row">
-          <h1 class="profile__handle" id="handle"></h1>
-          <div class="profile__actions">
-            <a class="btn" href="#contact">Book a consult</a>
-            <a class="btn btn--ghost" id="ig-link" target="_blank" rel="noopener">Follow</a>
+  <main id="top">
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__text reveal">
+          <p class="eyebrow">Doula support · Birth classes</p>
+          <h1>Your positive birth experience starts here.</h1>
+          <p class="lead">
+            I help couples feel calm, informed and supported — from pregnancy, through labour,
+            and into the first days with your baby.
+          </p>
+          <div class="hero__cta">
+            <a href="#contact" class="btn">Book a free consultation</a>
+            <a href="#services" class="btn btn--ghost">View services</a>
+          </div>
+          <ul class="hero__trust">
+            <li><strong>Couples</strong> supported together</li>
+            <li><strong>Evidence-based</strong> birth classes</li>
+            <li><strong>Home · Hospital</strong> birth support</li>
+          </ul>
+        </div>
+        <div class="hero__media reveal">
+          <div class="arch">
+            <img src="images/doula.jpg" alt="Your doula, The Peaceful Birth" data-fallback />
+            <div class="arch__fallback" aria-hidden="true">
+              <svg viewBox="0 0 200 260"><circle cx="135" cy="80" r="26" fill="#f2c79b"/><path d="M0 170c40-35 75-35 110-10s60 20 90-5v105H0z" fill="#d79b72"/><path d="M0 205c35-25 70-25 100-8s65 15 100-6v69H0z" fill="#b8693f"/><path d="M0 235c40-18 80-18 120-4s55 8 80-2v31H0z" fill="#8e4a2a"/></svg>
+            </div>
+          </div>
+          <div class="hero__badge">
+            <span>🤍</span>
+            <p><strong>Free 30-min chat</strong><br />No obligation</p>
           </div>
         </div>
-        <ul class="profile__stats">
-          <li><strong id="stat-posts"></strong> posts</li>
-          <li><strong id="stat-followers"></strong> followers</li>
-          <li><strong id="stat-births"></strong> births supported</li>
-        </ul>
-        <div class="profile__bio">
-          <p class="profile__name" id="name"></p>
-          <p class="profile__tagline" id="tagline"></p>
-          <div id="bio"></div>
+      </div>
+      <svg class="hills" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 70c180-50 360-50 540-10s360 40 540 0 270-40 360-20v80H0z" class="hills__1"/>
+        <path d="M0 95c200-35 420-35 620-5s420 25 620-5 160-15 200-10v45H0z" class="hills__2"/>
+      </svg>
+    </section>
+
+    <!-- ========== SIGNS YOU NEED A DOULA ========== -->
+    <section class="section section--warm" id="why">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">Is a doula right for you?</p>
+          <h2>Signs that tell you that you need a doula in your birth team</h2>
+        </div>
+        <div class="signs">
+          <article class="sign reveal"><span class="sign__num">01</span><h3>You feel anxious about labour</h3><p>Fear of the unknown is normal. A doula helps you understand every stage so you can meet it with calm instead of worry.</p></article>
+          <article class="sign reveal"><span class="sign__num">02</span><h3>You want a positive birth experience</h3><p>You have hopes for how your birth feels — and you want someone in your corner helping you work towards them.</p></article>
+          <article class="sign reveal"><span class="sign__num">03</span><h3>Your partner wants to help, but isn't sure how</h3><p>I guide your husband or partner with simple, practical ways to support you, so you both feel confident on the day.</p></article>
+          <article class="sign reveal"><span class="sign__num">04</span><h3>You want to make informed choices</h3><p>Understand your options, ask the right questions and feel heard by your care team.</p></article>
+          <article class="sign reveal"><span class="sign__num">05</span><h3>You had a difficult previous birth</h3><p>Planning for a different experience this time? Continuous support can make all the difference.</p></article>
+          <article class="sign reveal"><span class="sign__num">06</span><h3>You want continuous support</h3><p>Midwives and doctors change shifts. Your doula stays with you — before, during and after birth.</p></article>
         </div>
       </div>
     </section>
 
-    <!-- Story highlights act as category filters -->
-    <section class="highlights" id="highlights" aria-label="Categories"></section>
-
-    <nav class="tabs" id="tabs" role="tablist">
-      <button class="tab is-active" data-tab="all" role="tab">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
-        Posts
-      </button>
-      <button class="tab" data-tab="reviews" role="tab">
-        <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-9C1.2 8.8 3 5 6.6 5c2 0 3.4 1.1 4.4 2.5C12 6.1 13.4 5 15.4 5 19 5 20.8 8.8 19.3 12 17 16.6 12 21 12 21z"/></svg>
-        Kind words
-      </button>
-      <button class="tab" data-tab="saved" role="tab">
-        <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-5-6 5z"/></svg>
-        Saved
-      </button>
-    </nav>
-
-    <section id="feed" class="grid" aria-live="polite"></section>
-    <p class="empty" id="empty" hidden>Nothing saved yet — tap the bookmark on a post to keep it here.</p>
-
+    <!-- ========== SERVICES ========== -->
     <section class="section" id="services">
-      <p class="eyebrow">How I can support you</p>
-      <h2>Doula services</h2>
-      <div class="services" id="services-list"></div>
-    </section>
-
-    <section class="section about" id="about">
-      <div class="about__badge" aria-hidden="true">🤍</div>
-      <div>
-        <p class="eyebrow">Hello, I'm your doula</p>
-        <h2>Every birth deserves to feel safe, informed and supported.</h2>
-        <p>
-          I'm a birth and postpartum doula. I walk alongside you through pregnancy, labour and
-          those tender first weeks — with evidence-based information, hands-on comfort and steady
-          reassurance for you and your partner. However and wherever you give birth, my role is to
-          help you feel calm, confident and truly heard.
-        </p>
-        <ul class="about__points">
-          <li>Trained birth & postpartum doula</li>
-          <li>Home, birth centre & hospital births</li>
-          <li>VBAC, induction & caesarean support</li>
-          <li>Partners always welcome</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="faq">
-      <p class="eyebrow">Questions</p>
-      <h2>Frequently asked</h2>
-      <div class="faq" id="faq-list"></div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div>
-        <p class="eyebrow">Free 30-minute consultation</p>
-        <h2>Let's talk about your birth</h2>
-        <p>Tell me a little about yourself and I'll reply within a day to arrange a relaxed chat.</p>
-        <p class="contact__direct">
-          <a id="contact-email"></a><br />
-          <a id="contact-phone"></a><br />
-          <span id="contact-area"></span>
-        </p>
-      </div>
-      <form id="contact-form" class="form">
-        <label>Your name<input name="name" required /></label>
-        <label>Email<input name="email" type="email" required /></label>
-        <div class="form__row">
-          <label>Due date<input name="due" type="date" /></label>
-          <label>Interested in
-            <select name="service" id="service-select"><option value="">Not sure yet</option></select>
-          </label>
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">Birth support service</p>
+          <h2>Support for every part of your journey</h2>
+          <p class="section__sub">Choose the support that fits you. Every package can be tailored — let's talk about what you need.</p>
         </div>
-        <label>Planned birth place
-          <select name="place"><option>Not sure yet</option><option>Home</option><option>Birth centre</option><option>Hospital</option></select>
-        </label>
-        <label>Anything you'd like me to know?<textarea name="message" rows="4" placeholder="First baby, VBAC hopes, questions…"></textarea></label>
-        <button class="btn btn--wide" type="submit">Request my free consultation</button>
-      </form>
+        <div class="services">
+          <article class="service reveal">
+            <div class="service__icon">📖</div>
+            <h3>Birth Classes</h3>
+            <p>Prepare together as a couple with practical, evidence-based classes.</p>
+            <ul>
+              <li>Stages of labour & what to expect</li>
+              <li>Breathing, relaxation & comfort positions</li>
+              <li>Partner support techniques</li>
+              <li>Birth plan & your options</li>
+              <li>Early postpartum & newborn basics</li>
+            </ul>
+            <a href="#contact" class="btn btn--ghost btn--block" data-service="Birth Classes">Ask about classes</a>
+          </article>
+          <article class="service service--featured reveal">
+            <span class="service__flag">Most popular</span>
+            <div class="service__icon">🤲</div>
+            <h3>Doula Support</h3>
+            <p>Complete emotional and physical support from pregnancy to after birth.</p>
+            <ul>
+              <li>Prenatal meetings to plan your birth</li>
+              <li>Birth preferences guidance</li>
+              <li>On call for you near your due date</li>
+              <li>Continuous support during labour</li>
+              <li>Postnatal follow-up visit</li>
+            </ul>
+            <a href="#contact" class="btn btn--block" data-service="Doula Support">Book doula support</a>
+          </article>
+          <article class="service reveal">
+            <div class="service__icon">☕</div>
+            <h3>Consultation</h3>
+            <p>A one-to-one session for questions, birth planning or a second opinion on your plan.</p>
+            <ul>
+              <li>Talk through your fears & hopes</li>
+              <li>Review your birth plan</li>
+              <li>Ideas for a calmer birth</li>
+              <li>Online or in person</li>
+            </ul>
+            <a href="#contact" class="btn btn--ghost btn--block" data-service="Consultation">Book a consultation</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== HOW TO WORK WITH ME ========== -->
+    <section class="section section--dark" id="how">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">Simple & personal</p>
+          <h2>How to work with me</h2>
+        </div>
+        <ol class="steps">
+          <li class="reveal"><span>1</span><h3>Reach out</h3><p>Send me a message on WhatsApp or through the form with your due date.</p></li>
+          <li class="reveal"><span>2</span><h3>Free consultation</h3><p>We have a relaxed chat about your pregnancy, your hopes and your questions.</p></li>
+          <li class="reveal"><span>3</span><h3>Prepare together</h3><p>Classes and prenatal meetings so you and your partner feel ready.</p></li>
+          <li class="reveal"><span>4</span><h3>Birth day & beyond</h3><p>I'm with you through labour and check in after your baby arrives.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section class="section" id="about">
+      <div class="container about">
+        <div class="about__media reveal">
+          <div class="arch arch--small">
+            <img src="images/about.jpg" alt="Your doula supporting a mother" data-fallback />
+            <div class="arch__fallback arch__fallback--soft" aria-hidden="true"><span>🤍</span></div>
+          </div>
+        </div>
+        <div class="about__text reveal">
+          <p class="eyebrow">Meet your doula</p>
+          <h2>Hello, I'm here to walk with you.</h2>
+          <p>
+            Birth is one of the most powerful moments in your life — and you deserve to feel safe,
+            respected and supported through it. As a doula, I offer continuous emotional and
+            physical support, practical guidance and a calm presence for both you and your husband.
+          </p>
+          <p>
+            I share honest stories, tips and real experiences on Instagram so families can learn
+            what birth can look like when you feel prepared.
+          </p>
+          <div class="about__values">
+            <span>Calm presence</span><span>Informed choices</span><span>Couples together</span><span>Respectful care</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== STORIES / TESTIMONIALS ========== -->
+    <section class="section section--warm" id="stories">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">Story time</p>
+          <h2>Testimony from previous clients</h2>
+        </div>
+        <div class="stories">
+          <figure class="story reveal">
+            <blockquote>"She helped us feel calm and prepared. My husband knew exactly how to support me — it was the positive birth we hoped for."</blockquote>
+            <figcaption><span class="story__avatar">A</span>Client couple · First baby</figcaption>
+          </figure>
+          <figure class="story reveal">
+            <blockquote>"After a hard first birth, I was scared. This time I felt heard and supported the whole way through. Thank you so much."</blockquote>
+            <figcaption><span class="story__avatar">N</span>Mother of two</figcaption>
+          </figure>
+          <figure class="story reveal">
+            <blockquote>"The birth class changed everything for us. We went in knowing our options and feeling like a team."</blockquote>
+            <figcaption><span class="story__avatar">S</span>Birth class couple</figcaption>
+          </figure>
+        </div>
+        <div class="ig reveal">
+          <div>
+            <h3>Watch real stories & tips on Instagram</h3>
+            <p>Story time videos, client testimonies and birth tips — follow along at <strong>@thepeacefulbirth</strong>.</p>
+          </div>
+          <a class="btn" data-link="instagram" target="_blank" rel="noopener">Follow on Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section class="section" id="faq">
+      <div class="container faq-wrap">
+        <div class="section__head section__head--left reveal">
+          <p class="eyebrow">Questions</p>
+          <h2>Frequently asked questions</h2>
+          <p class="section__sub">Can't find your answer? Send me a message — I'm happy to help.</p>
+          <a class="btn btn--ghost" data-link="whatsapp" target="_blank" rel="noopener">Ask on WhatsApp</a>
+        </div>
+        <div class="faq reveal">
+          <details open><summary>What does a doula do?</summary><p>A doula provides continuous emotional, physical and informational support before, during and after birth. A doula does not provide medical care — I work alongside your doctor or midwife.</p></details>
+          <details><summary>Is a doula only for natural births?</summary><p>No. I support all kinds of births — at home or in hospital, with or without pain relief, inductions and caesarean births.</p></details>
+          <details><summary>Will my husband still have a role?</summary><p>Yes! I support couples together. I show your partner practical ways to help and make sure they feel confident and included.</p></details>
+          <details><summary>When should I book?</summary><p>Ideally in your second trimester, so we have time to prepare together — but get in touch at any stage to check availability.</p></details>
+          <details><summary>Do you offer online classes or consultations?</summary><p>Consultations can be online or in person. Ask me about current class formats and dates.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section class="section section--cta" id="contact">
+      <div class="container contact">
+        <div class="contact__text reveal">
+          <p class="eyebrow">Let's talk</p>
+          <h2>Book your free consultation</h2>
+          <p>Tell me a little about you and your due date. I'll get back to you to arrange a relaxed chat.</p>
+          <ul class="contact__list">
+            <li><span>💬</span><a data-link="whatsapp" target="_blank" rel="noopener">WhatsApp me</a></li>
+            <li><span>📸</span><a data-link="instagram" target="_blank" rel="noopener">@thepeacefulbirth</a></li>
+            <li><span>✉️</span><a data-link="email"></a></li>
+          </ul>
+        </div>
+        <form class="form reveal" id="contact-form">
+          <div class="form__row">
+            <label>Your name<input name="name" required autocomplete="name" /></label>
+            <label>Phone<input name="phone" type="tel" autocomplete="tel" /></label>
+          </div>
+          <div class="form__row">
+            <label>Due date<input name="due" type="date" /></label>
+            <label>I'm interested in
+              <select name="service" id="service-select">
+                <option>Doula Support</option>
+                <option>Birth Classes</option>
+                <option>Consultation</option>
+                <option>Not sure yet</option>
+              </select>
+            </label>
+          </div>
+          <label>Message<textarea name="message" rows="4" placeholder="First baby? Any hopes or worries for your birth?"></textarea></label>
+          <button class="btn btn--block" type="submit">Send via WhatsApp</button>
+          <p class="form__note">Opens WhatsApp with your details filled in.</p>
+        </form>
+      </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> <span id="footer-name"></span> · Doula support is non-medical and complements care from your midwife or doctor.</p>
-    <p>Follow along on Instagram <a id="footer-ig" target="_blank" rel="noopener"></a></p>
+    <div class="container footer__inner">
+      <div>
+        <a href="#top" class="logo logo--light"><span>The Peaceful Birth</span></a>
+        <p>Doula support & birth classes for a positive birth experience.</p>
+      </div>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
+        <a data-link="instagram" target="_blank" rel="noopener">Instagram</a>
+      </nav>
+    </div>
+    <p class="container footer__legal">© <span id="year"></span> The Peaceful Birth. Doula support is non-medical and complements care from your doctor or midwife.</p>
   </footer>
 
-  <!-- Post modal -->
-  <div class="modal" id="modal" hidden>
-    <div class="modal__backdrop" data-close></div>
-    <article class="post" role="dialog" aria-modal="true" aria-labelledby="post-title">
-      <button class="modal__close" data-close aria-label="Close">×</button>
-      <div class="post__media" id="post-media"></div>
-      <div class="post__side">
-        <header class="post__header">
-          <div class="mini-avatar" id="post-avatar"></div>
-          <div>
-            <strong id="post-handle"></strong>
-            <small id="post-category"></small>
-          </div>
-        </header>
-        <div class="post__body">
-          <h2 id="post-title"></h2>
-          <p id="post-caption"></p>
-          <p class="post__tags" id="post-tags"></p>
-        </div>
-        <footer class="post__footer">
-          <div class="post__icons">
-            <button id="post-like" aria-label="Like">
-              <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-9C1.2 8.8 3 5 6.6 5c2 0 3.4 1.1 4.4 2.5C12 6.1 13.4 5 15.4 5 19 5 20.8 8.8 19.3 12 17 16.6 12 21 12 21z"/></svg>
-            </button>
-            <a href="#contact" data-close aria-label="Message me">
-              <svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
-            </a>
-            <button id="post-save" aria-label="Save" class="push-right">
-              <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-5-6 5z"/></svg>
-            </button>
-          </div>
-          <p class="post__likes" id="post-likes"></p>
-          <a href="#contact" class="btn btn--wide" data-close>Book a free consultation</a>
-        </footer>
-      </div>
-    </article>
-  </div>
+  <a class="wa-float" data-link="whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2s.2-1.1.1-1.2-.2-.1-.5-.2z"/></svg>
+  </a>
 
-  <script src="js/content.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
