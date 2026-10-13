@@ -74,5 +74,23 @@ document.documentElement.classList.add("js");
     window.open(waLink(text), "_blank", "noopener");
   });
 
+  // Minimal page search: scroll to the first block that mentions the query.
+  const searchForm = document.getElementById("search");
+  const searchInput = document.getElementById("search-input");
+  const blocks = [...document.querySelectorAll(".sign, .service, .steps li, .about__text, .story, .faq details, .contact__text, .section__head")];
+  searchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const q = searchInput.value.trim().toLowerCase();
+    if (!q) return;
+    const hit = blocks.find((el) => el.textContent.toLowerCase().includes(q));
+    searchForm.classList.toggle("is-miss", !hit);
+    if (!hit) return;
+    if (hit.tagName === "DETAILS") hit.open = true;
+    hit.classList.add("is-in", "search-hit");
+    hit.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => hit.classList.remove("search-hit"), 2000);
+  });
+  searchInput.addEventListener("input", () => searchForm.classList.remove("is-miss"));
+
   document.getElementById("year").textContent = new Date().getFullYear();
 })();

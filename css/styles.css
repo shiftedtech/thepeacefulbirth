@@ -48,7 +48,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.12; mar
   transition: box-shadow .2s;
 }
 .nav.is-scrolled { box-shadow: 0 1px 0 var(--line), 0 8px 24px -18px rgba(74, 44, 30, .5); }
-.nav__inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 72px; }
 .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 600 21px var(--serif); color: var(--cocoa); }
 .logo svg { width: 38px; height: 38px; }
 .logo__ring { fill: var(--sand); stroke: var(--clay); stroke-width: 1.5; }
@@ -64,6 +64,16 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.12; mar
 .nav__toggle span + span { margin-top: 7px; }
 .nav__toggle[aria-expanded="true"] span:first-child { transform: translateY(4.5px) rotate(45deg); }
 .nav__toggle[aria-expanded="true"] span:last-child { transform: translateY(-4.5px) rotate(-45deg); }
+
+/* minimal search */
+.search { display: flex; align-items: center; margin-left: auto; margin-right: 24px; height: 34px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); }
+.search input { width: 96px; border: 0; background: none; outline: none; padding: 0 0 0 14px; font: 14px var(--sans); color: var(--ink); transition: width .25s; }
+.search input:focus { width: 150px; }
+.search input::-webkit-search-cancel-button { display: none; }
+.search button { display: grid; place-items: center; width: 32px; height: 32px; border: 0; background: none; cursor: pointer; color: var(--muted); }
+.search svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.search.is-miss { border-color: var(--clay); }
+.search-hit { outline: 3px solid var(--peach); outline-offset: 6px; border-radius: 12px; transition: outline-color 1.5s; }
 
 /* ---------- hero ---------- */
 .hero { position: relative; background: linear-gradient(180deg, var(--cream), var(--sand)); padding: 56px 0 140px; overflow: hidden; }
@@ -248,7 +258,12 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.12; mar
 }
 
 @media (max-width: 760px) {
-  .nav__toggle { display: block; }
+  .nav__toggle { display: block; order: 3; }
+  .logo { font-size: 17px; white-space: nowrap; gap: 8px; }
+  .logo svg { width: 32px; height: 32px; }
+  .search { margin-right: 8px; }
+  .search input { width: 56px; padding-left: 12px; }
+  .search input:focus { width: 110px; }
   .nav__links {
     position: absolute; top: 72px; left: 0; right: 0;
     flex-direction: column; align-items: stretch; gap: 0;
