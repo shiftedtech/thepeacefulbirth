@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Leave a Review · The Peaceful Birth</title>
+  <meta name="description" content="Share your birth experience with The Peaceful Birth on Google." />
+  <meta property="og:title" content="Leave a review for The Peaceful Birth 🤍" />
+  <meta property="og:description" content="It only takes a minute and helps other families find calm, supported birth care." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    body { background: linear-gradient(180deg, var(--cream), var(--sand)); min-height: 100vh; }
+    .review { max-width: 560px; margin: 0 auto; padding: 40px 16px 56px; text-align: center; }
+    .review__logo { display: inline-flex; margin-bottom: 72px; }
+    .review__card { background: var(--white); border-radius: 28px; padding: 40px 28px 32px; box-shadow: var(--shadow); }
+    .review__avatar { width: 96px; height: 96px; margin: -88px auto 18px; border-radius: 50%; overflow: hidden; background: var(--sand); box-shadow: 0 0 0 6px var(--white), 0 0 0 7px var(--clay); display: grid; place-items: center; font-size: 40px; }
+    .review__avatar img + span { display: none; }
+    .review__avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .review h1 { font-size: clamp(28px, 6vw, 36px); margin-bottom: 12px; }
+    .review__lead { color: var(--muted); margin: 0 0 26px; }
+    .stars { display: flex; justify-content: center; gap: 6px; margin-bottom: 8px; }
+    .stars a { font-size: 42px; line-height: 1; text-decoration: none; color: var(--peach); transition: transform .15s, color .15s; }
+    .stars:hover a { color: #f0b54a; }
+    .stars a:hover ~ a { color: var(--peach); }
+    .stars a:hover { transform: scale(1.15); }
+    .stars__hint { font-size: 13px; color: var(--muted); margin: 0 0 26px; }
+    .btn--google { gap: 12px; font-size: 16px; padding: 16px 26px; }
+    .btn--google svg { width: 22px; height: 22px; background: #fff; border-radius: 50%; padding: 3px; }
+    .review__time { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+
+    .prompts { text-align: left; margin-top: 28px; background: var(--white); border-radius: 22px; padding: 26px 24px; border: 1px solid var(--line); }
+    .prompts h2 { font-size: 22px; margin-bottom: 4px; }
+    .prompts > p { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
+    .prompts ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+    .prompts li { display: flex; gap: 10px; align-items: flex-start; background: var(--cream); border-radius: 12px; padding: 10px 14px; font-size: 15px; }
+    .prompts li span { color: var(--terracotta); font-weight: 700; }
+
+    .share { margin-top: 28px; display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center; text-align: left; background: var(--cocoa); color: #f2e4d6; border-radius: 22px; padding: 24px; }
+    .share h2 { color: var(--cream); font-size: 20px; margin-bottom: 6px; }
+    .share p { margin: 0 0 14px; font-size: 14px; color: #d9c3b0; }
+    .share__qr { width: 132px; height: 132px; background: #fff; border-radius: 14px; padding: 10px; display: grid; place-items: center; }
+    .share__qr img, .share__qr canvas { width: 100% !important; height: auto !important; }
+    .share__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .share .btn { padding: 9px 16px; font-size: 14px; background: var(--peach); border-color: var(--peach); color: var(--cocoa); }
+    .share .btn--ghost { background: transparent; color: var(--peach); }
+
+    .thanks { margin-top: 28px; font: italic 500 18px var(--serif); color: var(--brown); }
+    .back { display: inline-block; margin-top: 10px; font-weight: 700; color: var(--terracotta); text-decoration: none; }
+    .notice { display: none; margin: 0 0 18px; padding: 10px 14px; border-radius: 12px; background: #fdecd9; color: var(--brown); font-size: 13px; text-align: left; }
+    .notice.is-on { display: block; }
+
+    @media (max-width: 480px) {
+      .review { padding-top: 28px; }
+      .review__card { padding: 36px 20px 28px; }
+      .stars a { font-size: 38px; }
+      .share { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+      .share__actions { justify-content: center; }
+    }
+    @media print {
+      body { background: #fff; }
+      .prompts, .share__actions, .back, .thanks, .stars__hint, .review__time { display: none; }
+      .review__card, .share { box-shadow: none; }
+      .share { background: #fff; color: #000; border: 1px solid #ccc; }
+      .share h2 { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <main class="review">
+    <a href="index.html" class="logo review__logo">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" class="logo__ring"/><path d="M6 28c5-6 9-6 14-2s9 4 14-2" class="logo__hill"/><path d="M8 32c5-4 9-4 12-2s8 3 12-1" class="logo__hill logo__hill--2"/><circle cx="26" cy="14" r="4" class="logo__sun"/></svg>
+      <span>The Peaceful Birth</span>
+    </a>
+
+    <section class="review__card">
+      <div class="review__avatar"><img src="images/doula.jpg" alt="" onerror="this.remove()" /><span aria-hidden="true">🤍</span></div>
+      <p class="notice" id="notice">Setup needed: add the Google review link in <code>review.html</code> (<code>GOOGLE_REVIEW_URL</code>).</p>
+      <h1>Thank you for letting me be part of your birth story</h1>
+      <p class="review__lead">
+        Your words help other mothers and couples find calm, supported birth care.
+        Would you take a minute to share your experience on Google?
+      </p>
+
+      <div class="stars" aria-label="Rate your experience">
+        <a data-review href="#" aria-label="1 star">★</a><a data-review href="#" aria-label="2 stars">★</a><a data-review href="#" aria-label="3 stars">★</a><a data-review href="#" aria-label="4 stars">★</a><a data-review href="#" aria-label="5 stars">★</a>
+      </div>
+      <p class="stars__hint">Tap the stars to open Google reviews</p>
+
+      <a data-review href="#" class="btn btn--google btn--block" target="_blank" rel="noopener">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.2l7.9 6.2C12.5 13.6 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.8c4.3-4 6.9-9.9 6.9-17.2z"/><path fill="#FBBC05" d="M10.6 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6l-7.9-6.2A24 24 0 0 0 0 24c0 3.9.9 7.5 2.7 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.8c-2.1 1.4-4.8 2.3-8.5 2.3-6.2 0-11.5-4.1-13.4-9.9l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>
+        Write a Google review
+      </a>
+      <p class="review__time">Takes about 1 minute · You'll need a Google account</p>
+    </section>
+
+    <section class="prompts">
+      <h2>Not sure what to write?</h2>
+      <p>Here are a few ideas — a sentence or two is perfect.</p>
+      <ul>
+        <li><span>1</span>How did you feel before and after working with me?</li>
+        <li><span>2</span>Which support helped most — classes, labour support, or after birth?</li>
+        <li><span>3</span>How was the experience for your husband or partner?</li>
+        <li><span>4</span>Would you recommend a doula to a friend? Why?</li>
+      </ul>
+    </section>
+
+    <section class="share">
+      <div class="share__qr" id="qr" aria-label="QR code for leaving a review"></div>
+      <div>
+        <h2>Scan to leave a review</h2>
+        <p>Share this page with a client, or print the QR code for your birth bag and thank-you cards.</p>
+        <div class="share__actions">
+          <button class="btn" id="copy">Copy link</button>
+          <a class="btn btn--ghost" id="wa-share" target="_blank" rel="noopener">Send on WhatsApp</a>
+          <button class="btn btn--ghost" onclick="window.print()">Print QR</button>
+        </div>
+      </div>
+    </section>
+
+    <p class="thanks">Terima kasih & with love 🤍</p>
+    <a class="back" href="index.html">← Back to The Peaceful Birth</a>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    // ▼ Paste the "Ask for reviews" link from Google Business Profile here
+    //   (looks like https://g.page/r/XXXXXXXX/review).
+    const GOOGLE_REVIEW_URL = "";
+
+    const pageUrl = location.href.split(/[?#]/)[0];
+    const reviewUrl = GOOGLE_REVIEW_URL || "https://www.google.com/search?q=The+Peaceful+Birth+doula+reviews";
+    document.getElementById("notice").classList.toggle("is-on", !GOOGLE_REVIEW_URL);
+
+    document.querySelectorAll("[data-review]").forEach((a) => {
+      a.href = reviewUrl;
+      a.target = "_blank";
+      a.rel = "noopener";
+    });
+
+    // QR code points at the Google review form when set, otherwise at this page.
+    if (window.QRCode) {
+      new QRCode(document.getElementById("qr"), {
+        text: GOOGLE_REVIEW_URL || pageUrl, width: 220, height: 220,
+        colorDark: "#4a2c1e", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.M,
+      });
+    } else {
+      // Backup if the QR library didn't load.
+      const img = new Image();
+      img.alt = "QR code";
+      img.src = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&color=4a2c1e&data=" + encodeURIComponent(GOOGLE_REVIEW_URL || pageUrl);
+      img.onerror = () => { document.getElementById("qr").textContent = "🤍"; };
+      document.getElementById("qr").appendChild(img);
+    }
+
+    document.getElementById("wa-share").href =
+      "https://wa.me/?text=" + encodeURIComponent("Hi! Thank you for letting me be part of your birth journey 🤍 If you have a minute, I'd be so grateful for a short Google review: " + pageUrl);
+
+    const copyBtn = document.getElementById("copy");
+    copyBtn.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(pageUrl); copyBtn.textContent = "Copied!"; }
+      catch { prompt("Copy this link:", pageUrl); }
+      setTimeout(() => (copyBtn.textContent = "Copy link"), 1800);
+    });
+  </script>
+</body>
+</html>
