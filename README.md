@@ -32,3 +32,8 @@ A page to send clients after their birth: `https://shiftedtech.github.io/thepeac
 3. Share the page link on WhatsApp/Instagram, or tap **Print QR** for thank-you cards.
 
 Every client is sent straight to Google — the page does not filter out lower ratings, which Google's review policy does not allow.
+
+## WordPress version
+
+`wordpress/peaceful-birth/` is the same design as a WordPress theme; `wordpress/peaceful-birth.zip` is ready to upload.
+See [`wordpress/SETUP.md`](wordpress/SETUP.md) for installing it, adding the owner as an Editor with her Gmail, and Site Kit stats.
