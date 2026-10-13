@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Peaceful Birth Realty</title>
+  <meta name="description" content="Calm homes for new beginnings — browse listings from @thepeacefulbirth." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a href="#" class="brand" id="brand"></a>
+      <label class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search" type="search" placeholder="Search homes, areas…" aria-label="Search listings" />
+      </label>
+      <nav class="topbar__links">
+        <a href="#feed">Homes</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="btn btn--small">Book a viewing</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- Profile header, laid out like an Instagram profile -->
+    <section class="profile">
+      <div class="profile__avatar"><span id="avatar-initials"></span></div>
+      <div class="profile__info">
+        <div class="profile__row">
+          <h1 class="profile__handle" id="handle"></h1>
+          <div class="profile__actions">
+            <a class="btn" href="#contact">Message</a>
+            <a class="btn btn--ghost" id="ig-link" target="_blank" rel="noopener">Follow</a>
+          </div>
+        </div>
+        <ul class="profile__stats">
+          <li><strong id="stat-posts"></strong> listings</li>
+          <li><strong id="stat-followers"></strong> followers</li>
+          <li><strong id="stat-sold"></strong> sold</li>
+        </ul>
+        <div class="profile__bio">
+          <p class="profile__name" id="name"></p>
+          <p class="profile__tagline" id="tagline"></p>
+          <div id="bio"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Story highlights act as category filters -->
+    <section class="highlights" id="highlights" aria-label="Categories"></section>
+
+    <!-- Tabs -->
+    <nav class="tabs" id="tabs" role="tablist">
+      <button class="tab is-active" data-tab="all" role="tab">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+        Posts
+      </button>
+      <button class="tab" data-tab="open" role="tab">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+        Open houses
+      </button>
+      <button class="tab" data-tab="saved" role="tab">
+        <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-5-6 5z"/></svg>
+        Saved
+      </button>
+    </nav>
+
+    <section id="feed" class="grid" aria-live="polite"></section>
+    <p class="empty" id="empty" hidden>No homes match yet — try another filter.</p>
+
+    <section class="about" id="about">
+      <h2>Peaceful moves for growing families</h2>
+      <p>
+        A new baby and a new home often arrive in the same season. We guide you through buying,
+        selling and renting with the same calm, unhurried care — so you can focus on what matters.
+      </p>
+      <div class="about__cards">
+        <div><span>01</span><h3>Gentle guidance</h3><p>Clear timelines, no pressure, and support from first viewing to keys in hand.</p></div>
+        <div><span>02</span><h3>Family-first search</h3><p>Nursery space, schools, parks and quiet streets come first in every shortlist.</p></div>
+        <div><span>03</span><h3>Stress-free selling</h3><p>Staging, photography and a launch plan that works around your due date.</p></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div>
+        <h2>Book a viewing</h2>
+        <p>Tell us what you're looking for and we'll reply within a day.</p>
+        <p class="contact__direct">
+          <a id="contact-email"></a><br />
+          <a id="contact-phone"></a>
+        </p>
+      </div>
+      <form id="contact-form" class="form">
+        <label>Name<input name="name" required /></label>
+        <label>Email<input name="email" type="email" required /></label>
+        <label>Interested in
+          <select name="listing" id="listing-select"><option value="">General enquiry</option></select>
+        </label>
+        <label>Message<textarea name="message" rows="4" placeholder="Timing, budget, must-haves…"></textarea></label>
+        <button class="btn btn--wide" type="submit">Send message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> <span id="footer-name"></span> · Follow along on Instagram <a id="footer-ig" target="_blank" rel="noopener"></a></p>
+  </footer>
+
+  <!-- Post modal -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <article class="post" role="dialog" aria-modal="true" aria-labelledby="post-title">
+      <button class="modal__close" data-close aria-label="Close">×</button>
+      <div class="post__media">
+        <img id="post-img" alt="" />
+        <button class="post__nav post__nav--prev" id="post-prev" aria-label="Previous photo">‹</button>
+        <button class="post__nav post__nav--next" id="post-next" aria-label="Next photo">›</button>
+        <div class="post__dots" id="post-dots"></div>
+      </div>
+      <div class="post__side">
+        <header class="post__header">
+          <div class="mini-avatar" id="post-avatar"></div>
+          <div>
+            <strong id="post-handle"></strong>
+            <small id="post-location"></small>
+          </div>
+        </header>
+        <div class="post__body">
+          <h2 id="post-title"></h2>
+          <p class="post__price" id="post-price"></p>
+          <ul class="post__facts" id="post-facts"></ul>
+          <p class="post__open" id="post-open" hidden></p>
+          <p id="post-caption"></p>
+          <p class="post__tags" id="post-tags"></p>
+        </div>
+        <footer class="post__footer">
+          <div class="post__icons">
+            <button id="post-like" aria-label="Like">
+              <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-9C1.2 8.8 3 5 6.6 5c2 0 3.4 1.1 4.4 2.5C12 6.1 13.4 5 15.4 5 19 5 20.8 8.8 19.3 12 17 16.6 12 21 12 21z"/></svg>
+            </button>
+            <a href="#contact" data-close id="post-message" aria-label="Message about this home">
+              <svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+            </a>
+            <button id="post-save" aria-label="Save" class="push-right">
+              <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-5-6 5z"/></svg>
+            </button>
+          </div>
+          <p class="post__likes" id="post-likes"></p>
+          <a href="#contact" class="btn btn--wide" data-close id="post-book">Book a viewing</a>
+        </footer>
+      </div>
+    </article>
+  </div>
+
+  <script src="js/listings.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
