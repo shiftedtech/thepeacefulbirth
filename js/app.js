@@ -11,20 +11,17 @@
   };
 
   const state = {
-    filter: "all",   // highlight / tab filter
-    query: "",
+    filter: "all",
     liked: new Set(store.get("tpb-liked")),
     saved: new Set(store.get("tpb-saved")),
-    current: null,   // listing open in the modal
-    photo: 0,
+    current: null,
   };
 
-  const money = (l) =>
-    "$" + l.price.toLocaleString("en-US") + (l.status === "rent" ? "/mo" : "");
-  const statusLabel = { sale: "For sale", rent: "For rent", sold: "Sold" };
-  const initials = SITE.name.split(/\s+/).filter((w) => /^[A-Z]/.test(w)).slice(0, 2).map((w) => w[0]).join("");
+  const categoryLabel = Object.fromEntries(HIGHLIGHTS.map((h) => [h.id, h.label]));
+  const initials = SITE.name.split(/\s+/).filter((w) => /^[A-Z]/.test(w) && w !== "The").slice(0, 2).map((w) => w[0]).join("");
+  const likes = (p) => p.likes + (state.liked.has(p.id) ? 1 : 0);
 
-  // ---------- profile ----------
+  // ---------- profile & static sections ----------
   function renderProfile() {
     $("#brand").textContent = SITE.name;
     $("#avatar-initials").textContent = initials;
@@ -32,9 +29,9 @@
     $("#name").textContent = SITE.name;
     $("#tagline").textContent = SITE.tagline;
     $("#bio").innerHTML = SITE.bio.map((line) => `<p>${line}</p>`).join("");
-    $("#stat-posts").textContent = LISTINGS.filter((l) => l.status !== "sold").length;
+    $("#stat-posts").textContent = POSTS.length;
     $("#stat-followers").textContent = SITE.followers;
-    $("#stat-sold").textContent = LISTINGS.filter((l) => l.status === "sold").length;
+    $("#stat-births").textContent = SITE.births;
     $("#ig-link").href = SITE.instagram;
     $("#footer-ig").href = SITE.instagram;
     $("#footer-ig").textContent = "@" + SITE.handle;
@@ -44,8 +41,21 @@
     $("#contact-email").textContent = SITE.email;
     $("#contact-phone").href = "tel:" + SITE.phone.replace(/[^\d+]/g, "");
     $("#contact-phone").textContent = SITE.phone;
-    $("#listing-select").innerHTML += LISTINGS.filter((l) => l.status !== "sold")
-      .map((l) => `<option value="${l.title}">${l.title} — ${l.location}</option>`).join("");
+    $("#contact-area").textContent = SITE.area;
+
+    $("#services-list").innerHTML = SERVICES.map((s) => `
+      <article class="service ${s.featured ? "service--featured" : ""}">
+        ${s.featured ? `<span class="service__flag">Most booked</span>` : ""}
+        <h3>${s.name}</h3>
+        <p class="service__price">${s.price}</p>
+        <p class="service__blurb">${s.blurb}</p>
+        <ul>${s.items.map((i) => `<li>${i}</li>`).join("")}</ul>
+        <a href="#contact" class="btn ${s.featured ? "" : "btn--ghost"} btn--wide" data-service="${s.name}">Enquire</a>
+      </article>`).join("");
+    $("#service-select").innerHTML += SERVICES.map((s) => `<option>${s.name}</option>`).join("");
+
+    $("#faq-list").innerHTML = FAQ.map(([q, a]) => `
+      <details><summary>${q}</summary><p>${a}</p></details>`).join("");
   }
 
   function renderHighlights() {
@@ -56,45 +66,58 @@
       </button>`).join("");
   }
 
+  // ---------- post visuals ----------
+  // Text posts are drawn with HTML/CSS, like the quote and tip graphics on the Instagram grid.
+  function cardHTML(p) {
+    let body = "";
+    if (p.quote) body = `<p class="card__quote">“${p.quote}”</p><p class="card__author">${p.author}</p>`;
+    else if (p.list) body = `<h3 class="card__headline">${p.headline}</h3><ol class="card__list">${p.list.map((i) => `<li>${i}</li>`).join("")}</ol>`;
+    else body = `<h3 class="card__headline">${p.headline}</h3>${p.sub ? `<p class="card__sub">${p.sub}</p>` : ""}`;
+    return `<div class="card card--${p.theme}">
+      <span class="card__kicker">${p.kicker}</span>
+      <div class="card__body">${body}</div>
+      <span class="card__handle">@${SITE.handle}</span>
+    </div>`;
+  }
+
+  function mediaHTML(p) {
+    return p.type === "card"
+      ? cardHTML(p)
+      : `<div class="photo"><img src="${p.image}" alt="${p.title}" loading="lazy" /><span class="photo__fallback">${p.title}</span></div>`;
+  }
+
+  // Image hosts can fail; fall back to a soft branded tile instead of a broken icon.
+  function attachImageFallbacks(root) {
+    root.querySelectorAll("img").forEach((img) => {
+      img.addEventListener("error", () => img.closest(".photo").classList.add("is-broken"), { once: true });
+    });
+  }
+
   // ---------- grid ----------
-  function matches(l) {
-    const f = state.filter;
-    if (f === "saved" && !state.saved.has(l.id)) return false;
-    if (f !== "all" && f !== "saved" && l.status !== f && !l.tags.includes(f)) return false;
-    if (!state.query) return true;
-    const hay = [l.title, l.location, l.caption, statusLabel[l.status], ...l.features].join(" ").toLowerCase();
-    return hay.includes(state.query);
+  function matches(p) {
+    if (state.filter === "all") return true;
+    if (state.filter === "saved") return state.saved.has(p.id);
+    return p.category === state.filter;
   }
 
   function renderGrid() {
-    const items = LISTINGS.filter(matches);
+    const items = POSTS.filter(matches);
     $("#empty").hidden = items.length > 0;
-    $("#feed").innerHTML = items.map((l) => `
-      <button class="tile" data-id="${l.id}" aria-label="${l.title}, ${money(l)}">
-        <img src="${l.images[0]}" alt="" loading="lazy" />
-        <span class="tile__badge tile__badge--${l.status}">${statusLabel[l.status]}</span>
-        ${l.images.length > 1 ? `<svg class="tile__multi" viewBox="0 0 24 24"><rect x="7" y="3" width="14" height="14" rx="2"/><path d="M17 21H5a2 2 0 0 1-2-2V7"/></svg>` : ""}
+    $("#feed").innerHTML = items.map((p) => `
+      <button class="tile" data-id="${p.id}" aria-label="${p.title}">
+        ${mediaHTML(p)}
         <span class="tile__overlay">
-          <strong>${money(l)}</strong>
-          <span>${l.beds} bd · ${l.baths} ba · ${l.sqft.toLocaleString()} sqft</span>
-          <span>♥ ${(l.likes + (state.liked.has(l.id) ? 1 : 0)).toLocaleString()}</span>
+          <span>♥ ${likes(p).toLocaleString()}</span>
         </span>
       </button>`).join("");
     attachImageFallbacks($("#feed"));
-  }
-
-  // Image hosts can fail; show a soft branded placeholder instead of a broken icon.
-  function attachImageFallbacks(root) {
-    root.querySelectorAll("img").forEach((img) => {
-      img.addEventListener("error", () => img.classList.add("is-broken"), { once: true });
-    });
   }
 
   function setFilter(filter) {
     state.filter = filter;
     renderHighlights();
     document.querySelectorAll(".tab").forEach((t) => {
-      const on = t.dataset.tab === filter || (t.dataset.tab === "all" && !["open", "saved"].includes(filter));
+      const on = t.dataset.tab === filter || (t.dataset.tab === "all" && !["reviews", "saved"].includes(filter));
       t.classList.toggle("is-active", on);
     });
     renderGrid();
@@ -102,50 +125,28 @@
 
   // ---------- modal ----------
   function openPost(id) {
-    const l = LISTINGS.find((x) => x.id === id);
-    if (!l) return;
-    state.current = l;
-    state.photo = 0;
+    const p = POSTS.find((x) => x.id === id);
+    if (!p) return;
+    state.current = p;
+    $("#post-media").innerHTML = mediaHTML(p);
+    attachImageFallbacks($("#post-media"));
     $("#post-avatar").textContent = initials;
     $("#post-handle").textContent = SITE.handle;
-    $("#post-location").textContent = l.location;
-    $("#post-title").textContent = l.title;
-    $("#post-price").textContent = `${money(l)} · ${statusLabel[l.status]}`;
-    $("#post-facts").innerHTML = [
-      `${l.beds} beds`, `${l.baths} baths`, `${l.sqft.toLocaleString()} sqft`,
-    ].map((f) => `<li>${f}</li>`).join("");
-    $("#post-open").hidden = !l.openHouse;
-    $("#post-open").textContent = l.openHouse ? `📅 Open house: ${l.openHouse}` : "";
-    $("#post-caption").innerHTML = `<strong>${SITE.handle}</strong> ${l.caption}`;
-    $("#post-tags").textContent = l.features.map((f) => "#" + f.replace(/[^a-z0-9]/gi, "").toLowerCase()).join(" ");
-    $("#post-book").textContent = l.status === "sold" ? "Find a home like this" : "Book a viewing";
-    renderPhoto();
+    $("#post-category").textContent = categoryLabel[p.category] || "";
+    $("#post-title").textContent = p.title;
+    $("#post-caption").innerHTML = `<strong>${SITE.handle}</strong> ${p.caption}`;
+    $("#post-tags").textContent = p.tags.map((t) => "#" + t).join(" ");
     renderPostActions();
     $("#modal").hidden = false;
     document.body.classList.add("no-scroll");
     $(".modal__close").focus();
   }
 
-  function renderPhoto() {
-    const l = state.current;
-    const img = $("#post-img");
-    img.classList.remove("is-broken");
-    img.src = l.images[state.photo];
-    img.alt = `${l.title} photo ${state.photo + 1} of ${l.images.length}`;
-    const multi = l.images.length > 1;
-    $("#post-prev").hidden = !multi || state.photo === 0;
-    $("#post-next").hidden = !multi || state.photo === l.images.length - 1;
-    $("#post-dots").innerHTML = multi
-      ? l.images.map((_, i) => `<span class="${i === state.photo ? "is-active" : ""}"></span>`).join("")
-      : "";
-  }
-
   function renderPostActions() {
-    const l = state.current;
-    const liked = state.liked.has(l.id);
-    $("#post-like").classList.toggle("is-on", liked);
-    $("#post-save").classList.toggle("is-on", state.saved.has(l.id));
-    $("#post-likes").textContent = `${(l.likes + (liked ? 1 : 0)).toLocaleString()} likes`;
+    const p = state.current;
+    $("#post-like").classList.toggle("is-on", state.liked.has(p.id));
+    $("#post-save").classList.toggle("is-on", state.saved.has(p.id));
+    $("#post-likes").textContent = `${likes(p).toLocaleString()} likes`;
   }
 
   function closePost() {
@@ -175,42 +176,36 @@
     const tile = e.target.closest(".tile");
     if (tile) openPost(Number(tile.dataset.id));
   });
-  $("#search").addEventListener("input", (e) => {
-    state.query = e.target.value.trim().toLowerCase();
-    renderGrid();
+  $("#services-list").addEventListener("click", (e) => {
+    const link = e.target.closest("[data-service]");
+    if (link) $("#service-select").value = link.dataset.service;
   });
 
   $("#modal").addEventListener("click", (e) => {
-    if (e.target.closest("[data-close]")) {
-      if (e.target.closest("#post-message, #post-book") && state.current?.status !== "sold") {
-        $("#listing-select").value = state.current.title;
-      }
-      closePost();
-    }
+    if (e.target.closest("[data-close]")) closePost();
   });
-  $("#post-prev").addEventListener("click", () => { state.photo--; renderPhoto(); });
-  $("#post-next").addEventListener("click", () => { state.photo++; renderPhoto(); });
   $("#post-like").addEventListener("click", () => toggle("liked", "tpb-liked"));
   $("#post-save").addEventListener("click", () => toggle("saved", "tpb-saved"));
-  $("#post-img").addEventListener("error", (e) => e.target.classList.add("is-broken"));
-  $("#post-img").addEventListener("dblclick", () => {
+  $("#post-media").addEventListener("dblclick", () => {
     if (!state.liked.has(state.current.id)) toggle("liked", "tpb-liked");
   });
-
   document.addEventListener("keydown", (e) => {
-    if ($("#modal").hidden) return;
-    if (e.key === "Escape") closePost();
-    const n = state.current.images.length;
-    if (e.key === "ArrowRight" && state.photo < n - 1) { state.photo++; renderPhoto(); }
-    if (e.key === "ArrowLeft" && state.photo > 0) { state.photo--; renderPhoto(); }
+    if (e.key === "Escape" && !$("#modal").hidden) closePost();
   });
 
-  // No backend: hand the enquiry to the visitor's email client.
+  // No backend: hand the enquiry to the visitor's email app.
   $("#contact-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    const subject = `Viewing request${data.get("listing") ? ": " + data.get("listing") : ""}`;
-    const body = `Name: ${data.get("name")}\nEmail: ${data.get("email")}\n\n${data.get("message")}`;
+    const d = new FormData(e.target);
+    const subject = `Free consultation request${d.get("service") ? " – " + d.get("service") : ""}`;
+    const body = [
+      `Name: ${d.get("name")}`,
+      `Email: ${d.get("email")}`,
+      `Due date: ${d.get("due") || "—"}`,
+      `Birth place: ${d.get("place")}`,
+      "",
+      d.get("message"),
+    ].join("\n");
     window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
 
